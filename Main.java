@@ -1,5 +1,6 @@
 package Assignment2_200387784;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -38,18 +39,22 @@ public class Main {
                 String mainAnswer = input.nextLine();
 
                 if (mainAnswer.equals("add account")) {
-                    System.out.println("You are now adding a new account.");
-                    System.out.println("Please enter the name you want this account to have:");
-                    String accountName = input.nextLine();
-                    System.out.println("Thank you. Please enter a new account number you wish to use for this account:");
-                    int accountNumber = input.nextInt();
-                    System.out.println("Thank you. Now enter the account balance this account will have:");
-                    int accountBalance = input.nextInt();
-                    input.nextLine();
+                    try {
+                        System.out.println("You are now adding a new account.");
+                        System.out.println("Please enter the name you want this account to have:");
+                        String accountName = input.nextLine();
+                        System.out.println("Thank you. Please enter a new account number you wish to use for this account:");
+                        int accountNumber = input.nextInt();
+                        input.nextLine();
+                        System.out.println("Thank you. Now enter the account balance this account will have:");
+                        int accountBalance = input.nextInt();
+                        input.nextLine();
 
-                    b.addAccount(accountNumber, accountBalance, accountName);
+                        b.addAccount(accountNumber, accountBalance, accountName);
+                    }catch(InputMismatchException e){
+                        System.out.println("Please enter a valid integer for both the account number and account balance lines.");
+                    }
 
-                    System.out.println("Perfect, the new account has been added.");
                     System.out.println("Would you like to go back to the main menu? ('yes' or 'no')");
                     String continueAnswer = input.nextLine();
                     if (continueAnswer.equals("no")) {
@@ -74,6 +79,7 @@ public class Main {
                 } else if (mainAnswer.equals("view account details")) {
                     System.out.println("Enter the account # you wish to see details of:");
                     int accountDetail = input.nextInt();
+                    input.nextLine();
                     b.viewAccountDetails(accountDetail);
 
                     System.out.println("Would you like to go back to the main menu? ('yes' or 'no')");
@@ -88,6 +94,7 @@ public class Main {
                 } else if (mainAnswer.equals("modify an account")) {
                     System.out.println("Enter the account # you wish to modify:");
                     int accountDetail = input.nextInt();
+                    input.nextLine();
                     b.modifyAccount(accountDetail);
 
                     System.out.println("Would you like to go back to the main menu? ('yes' or 'no')");
@@ -103,6 +110,7 @@ public class Main {
                 } else if (mainAnswer.equals("delete an account")) {
                     System.out.println("Enter the account # you wish to delete:");
                     int accountDetail = input.nextInt();
+                    input.nextLine();
                     b.deleteAccount(accountDetail);
 
                     System.out.println("Would you like to go back to the main menu? ('yes' or 'no')");
@@ -116,7 +124,7 @@ public class Main {
 
                 } else if (mainAnswer.equals("help")) {
                     System.out.println("valid commands - 'add account', 'view accounts', 'view account details', 'modify an account', 'delete an account', 'help', 'summary' \n ");
-                    System.out.println("add account - enter an account name with solely letters, no special characters. Both account number and balance can be numerical only, up to 2147483647 \n");
+                    System.out.println("add account - enter an account name with solely letters, no special characters. Account number can be alphanumerical, and balance can be numerical only, up to 2147483647 \n");
                     System.out.println("view accounts - will print list of all accounts, with all information \n ");
                     System.out.println("modify an account - enter account # to modify. Then type either 'name', 'number' or 'balance' and enter a new value based on rules given above in 'add account'\n");
                     System.out.println("delete account - enter account # to delete. Then hit yes on poo-up box to confirm deletion or no to keep the account\n");
